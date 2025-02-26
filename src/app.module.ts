@@ -6,7 +6,14 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { SongsController } from './songs/songs.controller';
 import { SongsModule } from './songs/songs.module';
 import { Song } from './songs/song.entity';
+import { Artist } from './artists/artist.entity';
+import { User } from './users/user.entity';
+import { Playlist } from './playlists/playlist.entity';
+import { PlayListModule } from './playlists/playlists.module';
 // import { DataSource } from 'typeorm';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { ArtistsModule } from './artists/artists.module';
 
 @Module({
   imports: [
@@ -17,10 +24,14 @@ import { Song } from './songs/song.entity';
       port: 5432,
       username: 'postgres',
       password: '12345',
-      entities: [Song],
+      entities: [Song, Artist, User, Playlist],
       synchronize: true,
     }),
     SongsModule,
+    PlayListModule,
+    AuthModule,
+    UsersModule,
+    ArtistsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
